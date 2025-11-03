@@ -9614,3 +9614,106 @@ document.addEventListener('DOMContentLoaded', function() {
     selectTheme(savedTheme);
 });
 
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const ctx = document.getElementById('inventoryChart')?.getContext('2d');
+    if (ctx) new Chart(ctx, {type:'doughnut', data:{labels:['In Stock','Low','Critical'], datasets:[{data:[70,20,10], backgroundColor:['#10b981','#f59e0b','#ef4444']}]}});
+});
+
+document.querySelectorAll(".nav-tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+
+    const target = tab.getAttribute("data-tab");
+
+    // Remove active from tabs
+    document.querySelectorAll(".nav-tab").forEach(t => t.classList.remove("active"));
+
+    // Make clicked tab active
+    tab.classList.add("active");
+
+    // Hide all panels
+    document.querySelectorAll(".tab-panel").forEach(panel => {
+      panel.classList.remove("active");
+    });
+
+    // Show target
+    const activePanel = document.getElementById(target);
+    if (activePanel) activePanel.classList.add("active");
+  });
+});
+
+ // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Page navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and pages
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    pages.forEach(p => p.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Show the corresponding page
+                    const pageId = this.getAttribute('data-page');
+                    document.getElementById(pageId).classList.add('active');
+                });
+            });
+            
+            // Settings tab navigation
+            const tabButtons = document.querySelectorAll('.nav-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show the corresponding content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Theme selector functionality
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            
+            themeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    themeButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const theme = this.getAttribute('data-theme');
+                    selectTheme(theme);
+                });
+            });
+            
+            // IP restrictions toggle
+            const ipRestrictions = document.getElementById('ipRestrictions');
+            const ipList = document.querySelector('.ip-list');
+            
+            if (ipRestrictions && ipList) {
+                ipRestrictions.addEventListener('change', function() {
+                    ipList.style.display = this.checked ? 'block' : 'none';
+                });
+            }
+        });
+        
+        // Theme selection function
+        function selectTheme(theme) {
+            console.log(`Theme changed to: ${theme}`);
+            // Add your theme switching logic here
+            // This could involve updating CSS variables or loading a different stylesheet
+        }
